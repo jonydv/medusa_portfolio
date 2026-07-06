@@ -14,4 +14,7 @@ module.exports = defineConfig({
     },
     redisUrl: process.env.REDIS_URL,
   },
+  admin: {
+    disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
+  }
 });
