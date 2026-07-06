@@ -23,9 +23,10 @@ type SideMenuProps = {
   regions: HttpTypes.StoreRegion[] | null
   locales: Locale[] | null
   currentLocale: string | null
+  categories?: HttpTypes.StoreProductCategory[] | null
 }
 
-const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
+const SideMenu = ({ regions, locales, currentLocale, categories }: SideMenuProps) => {
   const countryToggleState = useToggleState()
   const languageToggleState = useToggleState()
 
@@ -88,6 +89,39 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                         )
                       })}
                     </ul>
+                    {!!categories?.length && (
+                      <ul
+                        className="flex flex-col gap-4 items-start justify-start"
+                        data-testid="side-menu-categories"
+                      >
+                        {categories.map((category) => (
+                          <li key={category.id} className="flex flex-col gap-2">
+                            <LocalizedClientLink
+                              href={`/categories/${category.handle}`}
+                              className="text-base hover:text-ui-fg-disabled"
+                              onClick={close}
+                            >
+                              {category.name}
+                            </LocalizedClientLink>
+                            {!!category.category_children?.length && (
+                              <ul className="flex flex-col gap-2 ml-3">
+                                {category.category_children.map((child) => (
+                                  <li key={child.id}>
+                                    <LocalizedClientLink
+                                      href={`/categories/${child.handle}`}
+                                      className="text-sm text-ui-fg-disabled hover:text-white"
+                                      onClick={close}
+                                    >
+                                      {child.name}
+                                    </LocalizedClientLink>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     <div className="flex flex-col gap-y-6">
                       {!!locales?.length && (
                         <div
