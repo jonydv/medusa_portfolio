@@ -1,5 +1,7 @@
 import { Metadata } from "next"
 
+import BannerStrip from "@modules/home/components/banner-strip"
+import CategoryHighlights from "@modules/home/components/category-highlights"
 import FeaturedProducts from "@modules/home/components/featured-products"
 import LatestProducts from "@modules/home/components/featured-products/latest-products"
 import Hero from "@modules/home/components/hero"
@@ -32,6 +34,7 @@ export default async function Home(props: {
   return (
     <>
       <Hero />
+      <BannerStrip />
       <div className="py-12">
         {collections?.length ? (
           <ul className="flex flex-col gap-x-6">
@@ -41,6 +44,7 @@ export default async function Home(props: {
           <LatestProducts region={region} />
         )}
       </div>
+      <CategoryHighlights />
     </>
   )
 }
