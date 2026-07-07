@@ -1,0 +1,59 @@
+{
+  "common": {
+    "copyright": "© {year} {storeName}. All rights reserved."
+  },
+  "nav": {
+    "account": "Account",
+    "cartFallback": "Cart (0)"
+  },
+  "sideMenu": {
+    "menu": "Menu",
+    "home": "Home",
+    "store": "Store",
+    "account": "Account",
+    "cart": "Cart"
+  },
+  "home": {
+    "hero": {
+      "title": "Ecommerce Starter Template",
+      "subtitle": "Powered by Medusa and Next.js",
+      "cta": "View on GitHub"
+    },
+    "categoryHighlights": {
+      "heading": "Shop by Category"
+    },
+    "heroCarousel": {
+      "previousSlide": "Previous slide",
+      "nextSlide": "Next slide",
+      "goToSlide": "Go to slide {number}"
+    },
+    "latestProducts": {
+      "heading": "Latest products"
+    }
+  },
+  "products": {
+    "viewAll": "View all"
+  },
+  "footer": {
+    "categoriesHeading": "Categories",
+    "collectionsHeading": "Collections",
+    "medusaHeading": "Medusa",
+    "github": "GitHub",
+    "documentation": "Documentation",
+    "sourceCode": "Source code",
+    "poweredBy": "Powered by",
+    "developedBy": "Developed by {name} — {year}",
+    "visitPortfolio": "Visit {name}'s portfolio website",
+    "visitLinkedin": "Visit {name}'s LinkedIn profile"
+  },
+  "layout": {
+    "countrySelect": {
+      "shippingTo": "Shipping to:"
+    },
+    "languageSelect": {
+      "language": "Language:",
+      "defaultOption": "Default",
+      "loading": "..."
+    }
+  }
+}

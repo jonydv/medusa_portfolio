@@ -33,6 +33,61 @@ module.exports = {
           80: "#1F2937",
           90: "#111827",
         },
+
+        background: "#FFFFFF",
+        foreground: "#0A0A0A",
+
+        primary: {
+          DEFAULT: "#FCCE11", 
+          foreground: "#0A0A0A",
+        },
+        secondary: {
+          DEFAULT: "#14293A",
+          foreground: "#FFFFFF",
+        },
+        accent: {
+          DEFAULT: "#FFD600",
+          foreground: "#0A0A0A",
+        },
+        destructive: {
+          DEFAULT: "#FF0000",
+          foreground: "#FFFFFF",
+          tint: "#FFF1F1",
+        },
+        info: {
+          DEFAULT: "#055F9F",
+          foreground: "#FFFFFF",
+          tint: "#DEEFFE",
+        },
+        success: {
+          DEFAULT: "#3FA34D",
+          foreground: "#FFFFFF",
+          tint: "#F0FBE4",
+        },
+        warning: {
+          DEFAULT: "#FCCE11",
+          foreground: "#0A0A0A",
+          tint: "#FFF5DF",
+        },
+
+        muted: {
+          DEFAULT: "#F4F4F4",
+          foreground: "#707070",
+        },
+
+        neutral: {
+          50: "#F4F4F4",
+          100: "#F1F1F1",
+          200: "#E9E9E9",
+          300: "#D3D6DB",
+          400: "#B9B9B9",
+          500: "#999999",
+          600: "#707070",
+          900: "#0A0A0A",
+        },
+
+        border: "#D3D6DB",
+        ring: "#055F9F",
       },
       borderRadius: {
         none: "0px",
@@ -41,6 +96,10 @@ module.exports = {
         rounded: "8px",
         large: "16px",
         circle: "9999px",
+        pill: "9999px",
+      },
+      boxShadow: {
+        card: "0 18px 15px 4px rgba(10, 10, 10, 0.19)",
       },
       maxWidth: {
         "8xl": "100rem",
@@ -58,16 +117,7 @@ module.exports = {
         "3xl": "2rem",
       },
       fontFamily: {
-        sans: [
-          "Inter",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Ubuntu",
-          "sans-serif",
-        ],
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       keyframes: {
         ring: {

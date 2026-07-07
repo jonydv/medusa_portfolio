@@ -1,10 +1,11 @@
 import { Metadata } from "next"
 
-import BannerStrip from "@modules/home/components/banner-strip"
 import CategoryHighlights from "@modules/home/components/category-highlights"
 import FeaturedProducts from "@modules/home/components/featured-products"
 import LatestProducts from "@modules/home/components/featured-products/latest-products"
 import Hero from "@modules/home/components/hero"
+import HeroCarousel from "@modules/home/components/hero-carousel"
+import { listBanners } from "@lib/data/banners"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 
@@ -23,9 +24,12 @@ export default async function Home(props: {
 
   const region = await getRegion(countryCode)
 
-  const { collections } = await listCollections({
-    fields: "id, handle, title",
-  })
+  const [{ collections }, banners] = await Promise.all([
+    listCollections({
+      fields: "id, handle, title",
+    }),
+    listBanners(),
+  ])
 
   if (!region) {
     return null
@@ -33,8 +37,11 @@ export default async function Home(props: {
 
   return (
     <>
-      <Hero />
-      <BannerStrip />
+      {banners.length > 0 ? (
+        <HeroCarousel banners={banners} />
+      ) : (
+        <Hero />
+      )}
       <div className="py-12">
         {collections?.length ? (
           <ul className="flex flex-col gap-x-6">
