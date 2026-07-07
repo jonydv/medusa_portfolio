@@ -2,22 +2,23 @@
 
 import { Popover, PopoverPanel, Transition } from "@headlessui/react"
 import useToggleState from "@lib/hooks/use-toggle-state"
+import { STORE_NAME } from "@lib/constants"
 import { ArrowRightMini, XMark } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { Text, clx } from "@modules/common/components/ui"
+import { useTranslations } from "next-intl"
 import { Fragment } from "react"
 import CountrySelect from "../country-select"
 import LanguageSelect from "../language-select"
 import { Locale } from "@lib/data/locales"
 
-
-const SideMenuItems = {
-  Home: "/",
-  Store: "/store",
-  Account: "/account",
-  Cart: "/cart",
-}
+const SIDE_MENU_ITEMS: { key: "home" | "store" | "account" | "cart"; href: string }[] = [
+  { key: "home", href: "/" },
+  { key: "store", href: "/store" },
+  { key: "account", href: "/account" },
+  { key: "cart", href: "/cart" },
+]
 
 type SideMenuProps = {
   regions: HttpTypes.StoreRegion[] | null
@@ -27,6 +28,8 @@ type SideMenuProps = {
 }
 
 const SideMenu = ({ regions, locales, currentLocale, categories }: SideMenuProps) => {
+  const t = useTranslations("sideMenu")
+  const tCommon = useTranslations("common")
   const countryToggleState = useToggleState()
   const languageToggleState = useToggleState()
 
@@ -39,9 +42,9 @@ const SideMenu = ({ regions, locales, currentLocale, categories }: SideMenuProps
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base"
+                  className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-primary"
                 >
-                  Menu
+                  {t("menu")}
                 </Popover.Button>
               </div>
 
@@ -63,10 +66,10 @@ const SideMenu = ({ regions, locales, currentLocale, categories }: SideMenuProps
                 leaveFrom="opacity-100 backdrop-blur-2xl"
                 leaveTo="opacity-0"
               >
-                <PopoverPanel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-[51] inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl">
+                <PopoverPanel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-[51] inset-x-0 text-sm text-secondary m-2 backdrop-blur-2xl">
                   <div
                     data-testid="nav-menu-popup"
-                    className="flex flex-col h-full bg-[rgba(3,7,18,0.5)] rounded-rounded justify-between p-6"
+                    className="flex flex-col h-full bg-neutral-200 rounded-rounded justify-between p-6"
                   >
                     <div className="flex justify-end" id="xmark">
                       <button data-testid="close-menu-button" onClick={close}>
@@ -74,16 +77,16 @@ const SideMenu = ({ regions, locales, currentLocale, categories }: SideMenuProps
                       </button>
                     </div>
                     <ul className="flex flex-col gap-6 items-start justify-start">
-                      {Object.entries(SideMenuItems).map(([name, href]) => {
+                      {SIDE_MENU_ITEMS.map(({ key, href }) => {
                         return (
-                          <li key={name}>
+                          <li key={key}>
                             <LocalizedClientLink
                               href={href}
-                              className="text-3xl leading-10 hover:text-ui-fg-disabled"
+                              className="text-3xl leading-10 hover:text-primary transition-colors"
                               onClick={close}
-                              data-testid={`${name.toLowerCase()}-link`}
+                              data-testid={`${key}-link`}
                             >
-                              {name}
+                              {t(key)}
                             </LocalizedClientLink>
                           </li>
                         )
@@ -98,7 +101,7 @@ const SideMenu = ({ regions, locales, currentLocale, categories }: SideMenuProps
                           <li key={category.id} className="flex flex-col gap-2">
                             <LocalizedClientLink
                               href={`/categories/${category.handle}`}
-                              className="text-base hover:text-ui-fg-disabled"
+                              className="text-base text-secondary/90 hover:text-primary transition-colors"
                               onClick={close}
                             >
                               {category.name}
@@ -109,7 +112,7 @@ const SideMenu = ({ regions, locales, currentLocale, categories }: SideMenuProps
                                   <li key={child.id}>
                                     <LocalizedClientLink
                                       href={`/categories/${child.handle}`}
-                                      className="text-sm text-ui-fg-disabled hover:text-white"
+                                      className="text-sm text-secondary/60 hover:text-primary transition-colors"
                                       onClick={close}
                                     >
                                       {child.name}
@@ -161,8 +164,10 @@ const SideMenu = ({ regions, locales, currentLocale, categories }: SideMenuProps
                         />
                       </div>
                       <Text className="flex justify-between txt-compact-small">
-                        © {new Date().getFullYear()} Medusa Store. All rights
-                        reserved.
+                        {tCommon("copyright", {
+                          year: new Date().getFullYear(),
+                          storeName: STORE_NAME,
+                        })}
                       </Text>
                     </div>
                   </div>

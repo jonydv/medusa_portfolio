@@ -58,8 +58,10 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
 Heading.displayName = "Heading"
 
 // Button Component
+const DEFAULT_LOADING_TEXT = "Loading..."
+
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary" | "transparent"
+  variant?: "primary" | "secondary" | "transparent" | "dark"
   size?: "small" | "medium" | "large"
   isLoading?: boolean
 }
@@ -82,11 +84,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={disabled || isLoading}
         className={clsx(
-          "inline-flex gap-2 items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-          variant === "primary" && "bg-black text-white hover:bg-gray-800",
+          "inline-flex gap-2 items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+          variant === "primary" &&
+            "bg-primary text-primary-foreground hover:bg-primary/90",
           variant === "secondary" &&
-            "bg-white text-black border border-gray-200 hover:bg-gray-50",
-          variant === "transparent" && "bg-transparent hover:bg-gray-100",
+            "bg-background text-foreground border border-border hover:bg-muted",
+          variant === "dark" &&
+            "bg-foreground text-background hover:bg-foreground/90",
+          variant === "transparent" && "bg-transparent hover:bg-muted",
           size === "small" && "h-8 px-3 text-sm",
           size === "medium" && "h-10 px-4",
           size === "large" && "h-12 px-6 text-lg",
@@ -94,7 +99,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...props}
       >
-        {isLoading ? "Loading..." : children}
+        {isLoading ? DEFAULT_LOADING_TEXT : children}
       </button>
     )
   }
@@ -131,11 +136,11 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         ref={ref}
         className={clsx(
           "inline-flex items-center rounded-full px-2 py-1 text-xs font-medium",
-          color === "green" && "bg-green-100 text-green-700",
-          color === "red" && "bg-red-100 text-red-700",
-          color === "blue" && "bg-blue-100 text-blue-700",
-          color === "orange" && "bg-orange-100 text-orange-700",
-          color === "grey" && "bg-gray-100 text-gray-700",
+          color === "green" && "bg-success-tint text-success",
+          color === "red" && "bg-destructive-tint text-destructive",
+          color === "blue" && "bg-info-tint text-info",
+          color === "orange" && "bg-warning-tint text-warning",
+          color === "grey" && "bg-muted text-muted-foreground",
           color === "purple" && "bg-purple-100 text-purple-700",
           className
         )}

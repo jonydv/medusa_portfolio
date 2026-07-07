@@ -72,3 +72,33 @@ export const noDivisionCurrencies = [
   "xdr",
   "xau",
 ]
+
+export const STORE_NAME = "Medusa Store"
+
+export const FOOTER_LINK_LIMIT = 6
+export const NAV_CATEGORY_LINK_LIMIT = 5
+export const CATEGORY_HIGHLIGHT_LIMIT = 8
+export const LATEST_PRODUCTS_LIMIT = 8
+
+export const FLAG_ICON_SIZE = "16px"
+export const DEFAULT_DISPLAY_LOCALE = "en-US"
+
+export const MEDUSA_GITHUB_URL = "https://github.com/medusajs"
+export const MEDUSA_DOCS_URL = "https://docs.medusajs.com"
+export const MEDUSA_SOURCE_URL = "https://github.com/medusajs/dtc-starter"
+
+export const DEVELOPER_NAME = "Jonatan Villalba"
+export const DEVELOPER_PORTFOLIO_URL = "https://www.jonatandvillalbaweb.com.ar/"
+export const DEVELOPER_LINKEDIN_URL =
+  "https://www.linkedin.com/in/jonatan-david-villalba/?locale=en-US"
+
+export const CATEGORY_CARD_ACCENTS = [
+  {
+    fallback: "bg-gradient-to-br from-primary to-primary/60",
+    badge: "bg-foreground text-background",
+  },
+  {
+    fallback: "bg-gradient-to-br from-foreground to-foreground/70",
+    badge: "bg-primary text-primary-foreground",
+  },
+] as const

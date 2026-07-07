@@ -11,9 +11,11 @@ import { Fragment, useEffect, useMemo, useState } from "react"
 import ReactCountryFlag from "react-country-flag"
 
 import { StateType } from "@lib/hooks/use-toggle-state"
+import { FLAG_ICON_SIZE } from "@lib/constants"
 import { useParams, usePathname } from "next/navigation"
 import { updateRegion } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
+import { useTranslations } from "next-intl"
 
 type CountryOption = {
   country: string
@@ -27,6 +29,7 @@ type CountrySelectProps = {
 }
 
 const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
+  const t = useTranslations("layout.countrySelect")
   const [current, setCurrent] = useState<CountryOption | undefined>(undefined)
 
   const { countryCode } = useParams()
@@ -73,14 +76,14 @@ const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
       >
         <ListboxButton className="py-1 w-full">
           <div className="txt-compact-small flex items-start gap-x-2">
-            <span>Shipping to:</span>
+            <span>{t("shippingTo")}</span>
             {current && (
               <span className="txt-compact-small flex items-center gap-x-2">
                 <ReactCountryFlag
                   svg
                   style={{
-                    width: "16px",
-                    height: "16px",
+                    width: FLAG_ICON_SIZE,
+                    height: FLAG_ICON_SIZE,
                   }}
                   countryCode={current.country ?? ""}
                 />
@@ -111,8 +114,8 @@ const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
                     <ReactCountryFlag
                       svg
                       style={{
-                        width: "16px",
-                        height: "16px",
+                        width: FLAG_ICON_SIZE,
+                        height: FLAG_ICON_SIZE,
                       }}
                       countryCode={o?.country ?? ""}
                     />{" "}
